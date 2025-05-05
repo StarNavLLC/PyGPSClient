@@ -215,6 +215,9 @@ class NMEAHandler:
             gnss = 6  # GLONASS
         elif data.talker == "GI":
             gnss = 7  # NAVIC
+        # KH add GX talker
+        elif data.talker == "GX":
+            gnss = 8  # PULSAR
         else:
             gnss = 0  # GPS, SBAS, QZSS
 

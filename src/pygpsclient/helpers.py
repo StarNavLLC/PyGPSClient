@@ -326,7 +326,7 @@ def snr2col(snr: int) -> str:
 
     """
 
-    return hsv2rgb(snr / (MAX_SNR * 2.5), 0.8, 0.8)
+    return hsv2rgb((snr) / (MAX_SNR * 2), 0.8, 0.8)
 
 
 def svid2gnssid(svid) -> int:

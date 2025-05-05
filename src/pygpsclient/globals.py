@@ -120,14 +120,15 @@ GNSS_ERR_EVENT = "<<gnss_error>>"
 GNSS_EVENT = "<<gnss_read>>"
 GNSS_TIMEOUT_EVENT = "<<gnss_timeout>>"
 GNSS_LIST = {
-    0: ("GPS", "cornflowerblue"),
-    1: ("SBA", "orange"),
-    2: ("GAL", "green4"),
-    3: ("BEI", "mediumpurple2"),
-    4: ("IME", "violet"),
-    5: ("QZS", "yellow"),
-    6: ("GLO", "indianred"),
-    7: ("NAV", "grey60"),
+    0: ("GPS", "indianred"),
+    # 1: ("SBA", "orange"),
+    # 2: ("GAL", "green4"),
+    # 3: ("BEI", "mediumpurple2"),
+    # 4: ("IME", "violet"),
+    # 5: ("QZS", "yellow"),
+    # 6: ("GLO", "indianred"),
+    # 7: ("NAV", "grey60"),
+    8: ("PUL", "#2da9a6")
 }
 GPSEPOCH0 = datetime(1980, 1, 6)  # for Wno and Tow calculations
 GPX_NS = (
@@ -189,6 +190,7 @@ KNOWNGPS = (
     "garmin",
     "gnss",
     "gps",
+    "pulsar",
     "magellan",
     "navstar",
     "septentrio",
@@ -212,7 +214,8 @@ CUSTOM = "custom"
 MAP = "map"
 SAT = "sat"
 WORLD = "world"
-MAX_SNR = 60  # upper limit of graphview snr axis
+# KH: adjust max SNR to accomodate Pulsar plotting
+MAX_SNR = 90  # upper limit of graphview snr axis
 MAXLOGLINES = 10000  # maximum number of 'lines' per datalog file
 MQAPIKEY = "mqapikey"
 MQTT_PROTOCOL = 16
