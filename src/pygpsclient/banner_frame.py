@@ -533,10 +533,10 @@ class BannerFrame(Frame):
         pdop = self.__app.gnss_status.pdop
         # KH: add case for displaying empty DOPS
         if pdop == "":
-            self._dop.set(f"{"N/A"} {""}")
+            self._dop.set(f"N/A")
             self._hvdop.set(
-                f"hdop {"N/A"}\n"
-                + f"vdop {"N/A"}"
+                f"hdop N/A\n"
+                + f"vdop N/A"
             )
         else:
             self._dop.set(f"{pdop:.2f} {dop2str(pdop):<9}")
