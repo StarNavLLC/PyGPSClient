@@ -29,3 +29,5 @@ snapcraft.yaml
 *.pyc
 *.bin
 *.gpx
+src/pygpsclient/build
+src/pygpsclient/dist

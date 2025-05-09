@@ -173,12 +173,12 @@ class AboutDialog:
             self._lbl_lib_versions[i].grid(
                 column=0, row=4 + i, columnspan=2, padx=2, pady=2
             )
-        self._btn_checkupdate.grid(
-            column=0, row=5 + i, ipadx=3, ipady=3, padx=3, pady=3
-        )
-        self._chk_checkupdate.grid(
-            column=1, row=5 + i, ipadx=3, ipady=3, padx=3, pady=3
-        )
+        # self._btn_checkupdate.grid(
+        #     column=0, row=5 + i, ipadx=3, ipady=3, padx=3, pady=3
+        # )
+        # self._chk_checkupdate.grid(
+        #     column=1, row=5 + i, ipadx=3, ipady=3, padx=3, pady=3
+        # )
         self._lbl_giticon.grid(column=0, row=6 + i, padx=(3, 1), pady=3, sticky=E)
         self._lbl_sponsoricon.grid(column=1, row=6 + i, padx=(3, 1), pady=3, sticky=W)
         self._lbl_github.grid(column=0, row=7 + i, columnspan=2, padx=(1, 3), pady=3)

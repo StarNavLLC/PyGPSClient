@@ -131,7 +131,7 @@ class GraphviewFrame(Frame):
         if self.__app.frm_settings.config.get("legend_b", 1):
             self._draw_legend()
 
-    def _draw_legend(self):
+    def _draw_legend_orig(self):
         """
         Draw GNSS color code legend
         """
@@ -157,6 +157,48 @@ class GraphviewFrame(Frame):
                 fill=FGCOL,
                 font=self._font,
             )
+
+    def _draw_legend(self):
+        """
+        Draw GNSS color code legend
+        """
+
+        data = self.__app.gnss_status.gsv_data
+        siv = len(self.__app.gnss_status.gsv_data)
+
+        if siv == 0:
+            return
+        
+        w = self.width / 10
+        h = self.height / 15
+        count = 0
+        prevId = -1
+        for d in sorted(data.values()):  # sort by ascending gnssid, svid
+            gnssId, _, _, _, _ = d
+            (gnssName, gnssCol) = GNSS_LIST[gnssId]
+            
+            if gnssId != prevId:
+                x = LEG_XOFF + w * count
+                self.can_graphview.create_rectangle(
+                    x,
+                    LEG_YOFF,
+                    x + w - LEG_GAP,
+                    LEG_YOFF + h,
+                    outline=gnssCol,
+                    fill=BGCOL,
+                    width=OL_WID,
+                )
+                self.can_graphview.create_text(
+                    (x + x + w - LEG_GAP) / 2,
+                    LEG_YOFF + h / 2,
+                    text=gnssName,
+                    fill=FGCOL,
+                    font=self._font,
+                )
+                count = count + 1
+            prevId = gnssId
+
+        # self.can_graphview.update_idletasks()
 
     def update_frame(self):
         """

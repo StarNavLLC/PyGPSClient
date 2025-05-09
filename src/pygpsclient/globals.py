@@ -48,6 +48,7 @@ APPNAME = __name__.split(".", 1)[0]  # i.e. "pygpsclient"
 AXISCOL = "white"
 BGCOL = "gray24"  # default widget background color
 BPSRATES = (
+    921600,
     9600,
     19200,
     38400,
@@ -55,7 +56,6 @@ BPSRATES = (
     115200,
     230400,
     460800,
-    921600,
     1000000,
     4800,
 )
@@ -121,13 +121,13 @@ GNSS_EVENT = "<<gnss_read>>"
 GNSS_TIMEOUT_EVENT = "<<gnss_timeout>>"
 GNSS_LIST = {
     0: ("GPS", "indianred"),
-    # 1: ("SBA", "orange"),
-    # 2: ("GAL", "green4"),
-    # 3: ("BEI", "mediumpurple2"),
-    # 4: ("IME", "violet"),
-    # 5: ("QZS", "yellow"),
-    # 6: ("GLO", "indianred"),
-    # 7: ("NAV", "grey60"),
+    1: ("SBA", "orange"),
+    2: ("GAL", "green4"),
+    3: ("BEI", "mediumpurple2"),
+    4: ("IME", "white"),
+    5: ("QZS", "yellow"),
+    6: ("GLO", "violet"),
+    7: ("NAV", "grey60"),
     8: ("PUL", "#2da9a6")
 }
 GPSEPOCH0 = datetime(1980, 1, 6)  # for Wno and Tow calculations
