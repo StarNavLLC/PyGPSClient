@@ -10,7 +10,7 @@ The original PyGPSClient tool has been modified to accomodate messages with this
 ## <a name="executables">Executable App Download</a>
 
 If you would like to simply download the viewer client without needing to install python, the executables are linked below. 
-* Ubuntu 20.04.6 Executable for x64 - [pygpsclient.tar.gz](https://github.com/StarNavLLC/PyGPSClient/releases/download/1.5.6.1_pulsar/pygpsclient.tar.gz) 
+* Ubuntu 20.04.6 Executable for x64 - [pygpsclient](https://github.com/StarNavLLC/PyGPSClient/releases/download/1.5.6.1_pulsar/pygpsclient) 
 * Windows 10 Executable for  x64 - [pygpsclient.exe](https://github.com/StarNavLLC/PyGPSClient/releases/download/1.5.6.1_pulsar/pygpsclient.exe) 
 
 To install via python and pip, see the [alternative installation with pip](#alternative-installation-with-pip) section.
