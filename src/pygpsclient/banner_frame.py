@@ -17,6 +17,7 @@ from tkinter import SUNKEN, Button, E, Frame, Label, N, S, StringVar, W
 from PIL import Image, ImageTk
 from pynmeagps.nmeahelpers import latlon2dmm, latlon2dms, llh2ecef
 from pyubx2 import dop2str
+import platform
 
 from pygpsclient.globals import (
     BGCOL,
@@ -607,7 +608,10 @@ class BannerFrame(Frame):
         """
 
         w = self.width
-        txt = 100
+        if platform.system() == "Linux":
+            txt = 200
+        else:
+            txt = 100
         for ctl in (
             self._lbl_status_preset,
             self._lbl_time,

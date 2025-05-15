@@ -134,7 +134,7 @@ MAPTYPES = (WORLD, MAP, SAT, CUSTOM)
 # rendering on different platforms
 if system() == "Linux":  # Wayland
     MINHEIGHT = 28
-    MINWIDTH = 28
+    MINWIDTH = 48
 elif system() == "Darwin":  # MacOS
 
     MINHEIGHT = 38

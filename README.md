@@ -1,41 +1,57 @@
+# StarNav Pulsar Support for PyGPSClient 
 
-# PyGPSClient
+As of NMEA protocol version 4.30, the National Marine Electronics Associate has not yet defined a Talker ID for Xona Space System's Pulsar&trade; constellation. StarNav's Pulsar receiver uses a custom Talker ID "GX" in its NMEA messages to allow for displaying Pulsar satellite information along with position and time solutions.
 
-[Current Status](#currentstatus) |
-[Installation](#installation) |
+The original PyGPSClient tool has been modified to accomodate messages with this custom Talker ID as seen in the following image. Details for the modified application are in the [PyGPSClient](#pygpsclient) section and following. Details for the original tool can be found [here](https://github.com/semuconsulting/PyGPSClient).  
+
+![app screenshot PUL demo](https://github.com/StarNavLLC/PyGPSClient/blob/Pulsar_Support/images/PUL_demo.png?raw=true)
+
+---
+## <a name="executables">Executable App Download</a>
+
+If you would like to simply download the viewer client without needing to install python, the executables are linked below. 
+* Ubuntu 20.04.6 Executable for x64 - [pygpsclient.tar.gz](https://github.com/StarNavLLC/PyGPSClient/releases/download/1.5.6.1_pulsar/pygpsclient.tar.gz) 
+* Windows 10 Executable for  x64 - [pygpsclient.exe](https://github.com/StarNavLLC/PyGPSClient/releases/download/1.5.6.1_pulsar/pygpsclient.exe) 
+
+To install via python and pip, see the [alternative installation with pip](#alternative-installation-with-pip) section.
+
+---
+# <a name="PyGPSCient"> PyGPSClient</a>
+
+<!-- [Current Status](#currentstatus) | -->
+[Alternative Installation with Pip](#alternative-installation-with-pip) |
 [Instructions](#instructions) |
-[UBX Configuration](#ubxconfig) |
-[NMEA Configuration](#nmeaconfig) |
-[NTRIP Client](#ntripconfig) |
-[SPARTN Client](#spartnconfig) |
-[Socket Server / NTRIP Caster](#socketserver) |
-[GPX Track Viewer](#gpxviewer) |
-[Mapquest API Key](#mapquestapi) |
-[User-defined Presets](#userdefined) |
-[CLI Utilities](#cli) |
-[Known Issues](#knownissues) |
+[UBX Configuration](#ubx-configuration-facilities) |
+[NMEA Configuration](#nmea-configuration-facilities) |
+[NTRIP Client](#ntrip-client-facilities) |
+[SPARTN Client](#spartn-client-facilities) |
+[Socket Server / NTRIP Caster](#socket-server--ntrip-caster-facilities) |
+[GPX Track Viewer](#gpx-track-viewer) |
+[Mapquest API Key](#mapquest-api-key) |
+[User-defined Presets](#user-defined-presets) |
+[CLI Utilities](#command-line-utilities) |<!-- [Known Issues](#knownissues) | -->
 [License](#license) |
-[Author Information](#author)
+[Author Information](#author-information)
 
 PyGPSClient is a free, open-source, multi-platform graphical GNSS/GPS testing, diagnostic and UBX &copy; (u-blox &trade;) device configuration application written entirely in Python and tkinter. 
 * Runs on any platform which supports a Python 3 interpreter (>=3.9) and tkinter (>=8.6) GUI framework, including Windows, MacOS, Linux and Raspberry Pi OS.
 * Supports NMEA, UBX, RTCM3, NTRIP and SPARTN protocols.
 * Capable of reading from a variety of GNSS data streams: Serial (USB / UART), Socket (TCP / UDP), binary data stream (terminal or file capture) and u-center (*.ubx) recording.
-* Provides [NTRIP](#ntripconfig) and [SPARTN](#spartnconfig) client facilities.
-* Can serve as an [NTRIP base station](#basestation) with a compatible receiver (e.g. ZED-F9P).
+* Provides [NTRIP](#ntrip-client-facilities) and [SPARTN](#spartn-client-facilities) client facilities.
+* Can serve as an [NTRIP base station](#base-station-configuration) with a compatible receiver (e.g. ZED-F9P).
 * While not intended to be a direct replacement, the application supports most of the UBX configuration functionality in u-blox's Windows-only [u-center &copy;](https://www.u-blox.com/en/product/u-center) tool (*only public-domain features are supported*).
 * Also supports proprietary NMEA configuration functionality for Quectel LG290P and compatible devices.
 
 ![full app screenshot ubx](https://github.com/semuconsulting/PyGPSClient/blob/master/images/app.png?raw=true)
 
-*Screenshot showing mixed-protocol stream from u-blox ZED-F9P receiver, using PyGPSClient's [NTRIP Client](#ntripconfig) with a base station 26km to the west to achieve better than 2cm accuracy*
+*Screenshot showing mixed-protocol stream from u-blox ZED-F9P receiver, using PyGPSClient's [NTRIP Client](#ntrip-client-facilities) with a base station 26km to the west to achieve better than 2cm accuracy*
 
-The application can be installed using the standard `pip` Python package manager - see [installation instructions](#installation) below.
+The application can be installed using the standard `pip` Python package manager - see [alternative installation with pip](#alternative-installation-with-pip) instructions below.
 
 This is an independent project and we have no affiliation whatsoever with u-blox.
 
 ---
-## <a name="currentstatus">Current Status</a>
+<!-- ## <a name="currentstatus">Current Status</a>
 
 ![Status](https://img.shields.io/pypi/status/PyGPSClient) 
 ![Release](https://img.shields.io/github/v/release/semuconsulting/PyGPSClient)
@@ -43,36 +59,36 @@ This is an independent project and we have no affiliation whatsoever with u-blox
 ![Release Date](https://img.shields.io/github/release-date/semuconsulting/PyGPSClient)
 ![Last Commit](https://img.shields.io/github/last-commit/semuconsulting/PyGPSClient)
 ![Contributors](https://img.shields.io/github/contributors/semuconsulting/PyGPSClient.svg)
-![Open Issues](https://img.shields.io/github/issues-raw/semuconsulting/PyGPSClient)
+![Open Issues](https://img.shields.io/github/issues-raw/semuconsulting/PyGPSClient) -->
 
 The PyGPSClient home page is at [PyGPSClient](https://github.com/semuconsulting/PyGPSClient). For a general overview of GNSS, DGPS, RTK, NTRIP and SPARTN technologies and terminology, refer to [GNSS Positioning - A Reviser](https://www.semuconsulting.com/gnsswiki/). For practical tips on RTK, refer to [Achieving cm Level GNSS Accuracy using RTK](https://www.semuconsulting.com/gnsswiki/rtktips/).
 
 Sphinx API Documentation in HTML format is available at [https://www.semuconsulting.com/pygpsclient](https://www.semuconsulting.com/pygpsclient).
 
-Contributions welcome - please refer to [CONTRIBUTING.MD](https://github.com/semuconsulting/PyGPSClient/blob/master/CONTRIBUTING.md).
+<!-- Contributions welcome - please refer to [CONTRIBUTING.MD](https://github.com/semuconsulting/PyGPSClient/blob/master/CONTRIBUTING.md). -->
 
-For [Bug reports](https://github.com/semuconsulting/PyGPSClient/blob/master/.github/ISSUE_TEMPLATE/bug_report.md), please use the template provided. For feature requests and general queries and advice, post a message to one of the [PyGPSClient Discussions](https://github.com/semuconsulting/PyGPSClient/discussions) channels in the first instance.
+<!-- For [Bug reports](https://github.com/semuconsulting/PyGPSClient/blob/master/.github/ISSUE_TEMPLATE/bug_report.md), please use the template provided. For feature requests and general queries and advice, post a message to one of the [PyGPSClient Discussions](https://github.com/semuconsulting/PyGPSClient/discussions) channels in the first instance. -->
 
----
-## <a name="installation">Installation</a>
+## <a name="installation"> Alternative Installation with Pip</a>
 
 ## The Quick Version
 
-If you have an [official Python]([Python.org](https://www.python.org/downloads/)) >=3.9 with tkinter >=8.6 installed and the Python [binaries](#binaries) folder is in your PATH, you can install PyGPSClient using pip:
+If you have an [official Python]([Python.org](https://www.python.org/downloads/)) >=3.9 with tkinter >=8.6 installed and the Python [binaries](#binaries) folder is in your PATH, you can globally install StarNav's modified PyGPSClient using pip:
 ```shell
-python3 -m pip install --upgrade pygpsclient
+python3 -m pip install git+https://github.com/StarNavLLC/PyGPSClient.git@Pulsar_Support
 ```
 
 and then run it by typing:
 ```shell
 pygpsclient
 ```
+**NB** You may need to substitute `python` for `python3`, depending on your particular environment (*on Windows it's generally `python`*).
 
-**NB** If you get `error: externally-managed-environment`, refer to the longer installation guidelines for **virtual environments** using [pip](#pip) or [pipx](#pipx) below.
+**NB** If you get `error: externally-managed-environment`, refer to the longer installation guidelines for **virtual environments** using [pip](#install-using-pip) or [pipx](#install-using-pipx) below.
 
 ## The Longer Version
 
-In the following, `python3` & `pip` refer to the Python 3 executables. You may need to substitute `python` for `python3`, depending on your particular environment (*on Windows it's generally `python`*). 
+In the following, `python3` & `pip` refer to the Python 3 executables. 
 
 ### Platform Dependencies
 
@@ -148,14 +164,14 @@ usermod -a -G tty myuser
 The recommended way to install the latest version of `PyGPSClient` is with [pip](http://pypi.python.org/pypi/pip/):
 
 ```shell
-python3 -m pip install --upgrade pygpsclient
+python3 -m pip install git+https://github.com/StarNavLLC/PyGPSClient.git@Pulsar_Support
 ```
 
 If required, `PyGPSClient` can also be installed and run in a [virtual environment](https://www.geeksforgeeks.org/python-virtual-environment/) - this may be necessary if you have an `externally-managed-environment`, e.g.:
 ```shell
 python3 -m venv env
 source env/bin/activate # (or env\Scripts\activate on Windows)
-python3 -m pip install --upgrade pygpsclient
+python3 -m pip install git+https://github.com/StarNavLLC/PyGPSClient.git@Pulsar_Support
 pygpsclient
 ```
 
@@ -174,7 +190,7 @@ pygpsclient
 To upgrade PyGPSClient to the latest version from the virtual environment:
 ```shell
 source env/bin/activate # (or env\Scripts\activate on Windows)
-python3 -m pip install --upgrade pygpsclient
+python3 -m pip install git+https://github.com/StarNavLLC/PyGPSClient.git@Pulsar_Support
 ```
 
 The pip installation process places an executable file `pygpsclient` in the Python binaries folder (`../bin` on Linux & MacOS, `..\Scripts` on Windows). The PyGPSClient application may be started by double-clicking on this executable file from your file manager or, if the binaries folder is in your PATH, by opening a terminal and typing (all lowercase):
@@ -216,7 +232,7 @@ You can also use [pipx](https://pipx.pypa.io/latest/installation/) (_if availabl
 
 ```shell
 pipx ensurepath
-pipx install pygpsclient
+pipx install git+https://github.com/StarNavLLC/PyGPSClient.git@Pulsar_Support
 ```
 
 `pipx` will typically create a virtual environment in the user's local shared folder e.g. `/home/user/.local/share/pipx/venvs/pygpsclient`.
@@ -619,10 +635,10 @@ designated output stream.
 
 For further details, refer to the `pygnssutils` homepage at [https://github.com/semuconsulting/pygnssutils](https://github.com/semuconsulting/pygnssutils) or `pyubxutils` homepage at [https://github.com/semuconsulting/pyubxutils](https://github.com/semuconsulting/pyubxutils).
 
---
+<!-- --
 ## <a name="knownissues">Known Issues</a>
 
-None
+None -->
 
 ---
 ## <a name="license">License</a>
