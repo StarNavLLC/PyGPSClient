@@ -130,6 +130,11 @@ class ScatterViewFrame(Frame):
         self._reflat.set("Reference Lat" if reflat == 0.0 else reflat)
         self._reflon.set("Reference Lon" if reflon == 0.0 else reflon)
         self._scale_factors = (
+            100000,
+            75000,
+            50000,
+            25000,
+            10000,
             5000,
             2000,
             1000,
